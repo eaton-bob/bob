@@ -16,11 +16,7 @@ int main () {
     r = mlm_client_connect (consumer, endpoint, 1000, "consumer");
     assert (r != -1);
 
-
-    mlm_client_set_producer (producer, "BOB");
-    mlm_client_set_consumer (consumer, "BOB", ".*");
-
-    mlm_client_sendx (producer, "SUBJECT", "Hello", "Bob", NULL);
+    mlm_client_sendtox (producer, "consumer", "SUBJECT", "Hello", "Bob", NULL);
 
     zmsg_t *msg = mlm_client_recv (consumer);
     zsys_info ("subject=%s", mlm_client_subject (consumer));
